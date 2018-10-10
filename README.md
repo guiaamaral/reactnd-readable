@@ -4,7 +4,7 @@ This repository contains Readable, a comment web app that users can post content
 
 ## Prerequisites
 
-The project can be built with npm. In case you don't have any installed on your system.
+The project can be built with npm. In case you don't have installed on your system.
 
 - npm is distributed with Node.js which means that when you download Node.js, you automatically get npm installed on your computer. [Download Node.js](https://nodejs.org/en/download/)
 

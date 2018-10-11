@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import { capitalize, timestampToDate, humanLink } from '../utils/helpers';
 import { fetchCategories } from '../actions/categories';
 import { fetchPosts } from '../actions/posts';
+import Header from './Header';
 
 class App extends Component {
   static propTypes = {
@@ -21,36 +27,36 @@ class App extends Component {
     const { categories, posts } = this.props
     return (
       <div>
-        <div className="header">
-          <h1>{capitalize("Readable")}</h1>
-        </div>
+        <Header />
         <Route exact path="/" render={()=>(
-          <div className="content">
-            <div className="categories">
-              <ul>
+          <Grid container spacing={24}>
+            <Grid item xs={12} md={3}>
+              <List component="nav">
+                <ListItem>
+                  <ListItemText primary="Categories" />
+                </ListItem>
+                <Divider />
                 {categories && categories.map(category => (
-                  <li key={category.name}>
-                    <Link to={`/category/${category.path}`}>
-                      {capitalize(category.name)}
-                    </Link>
-                  </li>
+                  <ListItem button key={category.name} component={Link} to={`/category/${category.path}`}>
+                    <ListItemText primary={capitalize(category.name)} />
+                  </ListItem>
                 ))}
-              </ul>
-            </div>
-            <div className="posts">
-              <ul>
+              </List>
+            </Grid>
+            <Grid item xs={12} md={9}>
+              <List component="nav">
                 {posts && posts.map(post => (
-                  <li key={post.id}>
-                    <Link to={(`/post/${humanLink(post.title)}`)}>
+                  <ListItem button key={post.id} component={Link} to={(`/post/${humanLink(post.title)}`)}>
+                    <Grid item xs={12}>
                       <h2>{capitalize(post.title)}</h2>
-                    </Link>
-                    <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at <a href={`/category/${post.category}`}>{post.category}</a> / {post.commentCount} comments</small>
-                    <p>{post.body}</p>
-                  </li>
+                      <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at <a href={`/category/${post.category}`}>{post.category}</a> / {post.commentCount} comments</small>
+                      <p>{post.body}</p>
+                    </Grid>
+                  </ListItem>
                 ))}
-              </ul>
-            </div>
-          </div>
+              </List>
+            </Grid>
+          </Grid>
         )} />
       </div>
     );

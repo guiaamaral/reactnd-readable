@@ -5,11 +5,14 @@ import {
 import {
   GET_POSTS
 } from '../actions/posts';
+import {
+  GET_COMMENTS
+} from '../actions/comments';
 
 function categories(state = [], action) {
   switch(action.type) {
     case GET_CATEGORIES :
-      return action.payload
+      return action.res.categories
     default :
       return state
   }
@@ -18,7 +21,17 @@ function categories(state = [], action) {
 function posts(state = [], action) {
   switch(action.type) {
     case GET_POSTS :
-      return action.payload
+      return action.posts
+    default :
+      return state
+  }
+}
+
+function comments(state = [], action) {
+  const { comments, postId} = action
+  switch(action.type) {
+    case GET_COMMENTS :
+      return Object.assign({}, state, {[postId]: comments})
     default :
       return state
   }
@@ -26,5 +39,6 @@ function posts(state = [], action) {
 
 export default combineReducers({
   categories,
-  posts
+  posts,
+  comments
 });

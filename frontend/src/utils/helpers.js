@@ -4,17 +4,15 @@ export function capitalize (str = '') {
     : str[0].toUpperCase() + str.slice(1);
 }
 
-export function humanLink(str = '') {
-  return typeof str !== 'string'
-    ? ''
-    : str.replace(/ /g,'-').replace(/[^a-zA-Z0-9-. ]/g,'').toLowerCase();
-}
-
 export function timestampToDate(timestamp) {
-  const date = new Date(timestamp);
+  const date    = new Date(timestamp);
   const year    = date.getFullYear();
   const months  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const month   = months[date.getMonth()];
-  const day     = date.getDay();
+  const day     = date.getDate();
   return month +' '+ day +', '+ year;
+}
+
+export function uuid() {
+  return Math.random().toString(36).substr(-8) + Math.random().toString(36).substr(-8);
 }

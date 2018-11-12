@@ -7,7 +7,7 @@ export const fetchCategories = () => {
     API.fetchCategories().then(res => {
       dispatch({
         type: GET_CATEGORIES,
-        payload: res.categories
+        res
       });
     });
   }

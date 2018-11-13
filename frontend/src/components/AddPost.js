@@ -103,12 +103,12 @@ class AddPost extends Component {
                       ))}
                     </TextField>
                   </Grid>
+                  <Grid item xs={12}>
+                    <Button type="submit" variant="contained" color="primary">
+                      Submit
+                    </Button>
+                  </Grid>
                 </Grid>
-                <div>
-                  <Button type="submit" variant="contained" color="primary">
-                    Submit
-                  </Button>
-                </div>
               </form>
             </Grid>
           <Grid item xs={12} md={2}>

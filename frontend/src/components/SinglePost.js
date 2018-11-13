@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import _ from 'lodash';
 import { capitalize, timestampToDate } from '../utils/helpers';
 import Divider from '@material-ui/core/Divider';
 import { fetchPosts } from '../actions/posts';
 import { fetchComments } from '../actions/comments';
 import PostComments from './PostComments';
-import AddComment from './AddComment';
 
 
 class SinglePost extends Component {
@@ -34,9 +35,12 @@ class SinglePost extends Component {
                 <h2>{capitalize(post.title)}</h2>
                 <p>{post.body}</p>
                 <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
-                <Divider />
+                <br/>
+                <Button color="primary" variant="contained" component={Link} to={`/post/${post.id}/comment`}>
+                  Add a comment
+                </Button>
                 {comments && <PostComments comments={comments}/>}
-                <AddComment postId={post.id} />
+
               </Grid>
             )}
           <Grid item xs={12} md={2}>

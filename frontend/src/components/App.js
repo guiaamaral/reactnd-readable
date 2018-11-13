@@ -8,6 +8,7 @@ import Home from './Home';
 import SingleCategory from './SingleCategory';
 import SinglePost from './SinglePost';
 import AddPost from './AddPost';
+import AddComment from './AddComment';
 
 const theme = createMuiTheme({
   typography: {
@@ -25,6 +26,7 @@ class App extends Component {
         <Route exact path="/category/:name" component={SingleCategory} />
         <Route exact path="/post/:postId" component={SinglePost} />
         <Route exact path="/add-post" component={AddPost} />
+        <Route exact path="/post/:postId/comment" component={AddComment} />
         {currentPath.includes('post') ?
           <div></div>
         :

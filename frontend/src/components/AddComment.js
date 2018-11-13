@@ -15,16 +15,16 @@ class AddComment extends Component {
 
   addComment = (e) => {
     e.preventDefault();
+    const postId = this.props.match.params.postId;
 
     const newComment = {
       id: uuid(),
       timestamp: Date.now(),
-      postId: this.props.postId,
       body: e.target.body.value,
       author: e.target.author.value,
+      parentId: postId
     }
-    //console.log(newComment)
-    this.props.addComment(newComment, this.props.postId, () => this.props.history.push(`/post/${this.props.postId}`));
+    this.props.addComment(newComment, postId, () => this.props.history.push(`/post/${postId}`));
   };
 
   render() {

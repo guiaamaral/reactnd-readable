@@ -15,13 +15,13 @@ export const fetchComments = (postId) => {
   }
 }
 
-export const addComment = (comments, postId, callback) => {
+export const addComment = (comment, parentId, callback) => {
   return (dispatch) => {
-    API.addComment(comments).then( comments => {
+    API.addComment(comment).then( comment => {
       dispatch({
         type: ADD_COMMENT,
-        postId,
-        comments
+        parentId,
+        comment
       })
     })
     .then(() => callback());

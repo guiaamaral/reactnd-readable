@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
+import * as commentActions from '../actions/comments'
 import { timestampToDate } from '../utils/helpers';
 
 class PostComments extends Component {
@@ -31,4 +32,6 @@ function mapStateToProps({ posts }) {
   }
 }
 
-export default connect(mapStateToProps)(PostComments);
+export default connect(mapStateToProps,
+  commentActions
+)(PostComments);

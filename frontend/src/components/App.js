@@ -3,7 +3,6 @@ import { Link, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import BackIcon from '@material-ui/icons/ArrowLeft';
 import Header from './Header';
 import Home from './Home';
 import SingleCategory from './SingleCategory';
@@ -26,10 +25,8 @@ class App extends Component {
         <Route exact path="/category/:name" component={SingleCategory} />
         <Route exact path="/post/:postId" component={SinglePost} />
         <Route exact path="/add-post" component={AddPost} />
-        {currentPath.includes('add-post') ?
-          <Button variant="fab" color="primary" component={Link} to="/">
-            <BackIcon />
-          </Button>
+        {currentPath.includes('post') ?
+          <div></div>
         :
           <Button variant="fab" color="primary" component={Link} to="/add-post">
             <AddIcon />

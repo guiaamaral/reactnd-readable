@@ -8,6 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import { fetchPosts } from '../actions/posts';
 import { fetchComments } from '../actions/comments';
 import PostComments from './PostComments';
+import AddComment from './AddComment';
+
 
 class SinglePost extends Component {
   static propTypes = {
@@ -34,6 +36,7 @@ class SinglePost extends Component {
                 <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
                 <Divider />
                 {comments && <PostComments comments={comments}/>}
+                <AddComment postId={post.id} />
               </Grid>
             )}
           <Grid item xs={12} md={2}>

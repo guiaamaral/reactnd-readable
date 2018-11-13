@@ -3,10 +3,12 @@ import {
   GET_CATEGORIES
 } from '../actions/categories';
 import {
-  GET_POSTS
+  GET_POSTS,
+  ADD_POST
 } from '../actions/posts';
 import {
-  GET_COMMENTS
+  GET_COMMENTS,
+  ADD_COMMENT
 } from '../actions/comments';
 
 function categories(state = [], action) {
@@ -22,15 +24,19 @@ function posts(state = [], action) {
   switch(action.type) {
     case GET_POSTS :
       return action.posts
+    case ADD_POST:
+      return state.concat(action.post)
     default :
       return state
   }
 }
 
 function comments(state = [], action) {
-  const { comments, postId} = action
+  const { comments, postId } = action
   switch(action.type) {
     case GET_COMMENTS :
+      return Object.assign({}, state, {[postId]: comments})
+    case ADD_COMMENT:
       return Object.assign({}, state, {[postId]: comments})
     default :
       return state

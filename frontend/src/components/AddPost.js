@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { fetchCategories } from '../actions/categories';
 import { addPost } from '../actions/posts'
-import { uuid, timestampToDate } from '../utils/helpers.js';
+import { uuid } from '../utils/helpers.js';
 
 class AddPost extends Component {
   static propTypes = {
@@ -45,7 +45,6 @@ class AddPost extends Component {
 
   render() {
     const { categories } = this.props
-    console.log(timestampToDate(Date.now()));
     return (
       <div>
         <Grid container spacing={24}>

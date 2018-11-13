@@ -36,3 +36,15 @@ export const fetchComments = (postId) => {
   return fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json());
 }
+
+export const addComment = (newComment) => {
+  return fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newComment)
+  })
+  .then(res => res.json());
+}

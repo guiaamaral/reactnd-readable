@@ -16,10 +16,10 @@ export const fetchPosts = () => {
 
 export const addPost = (post, callback) => {
   return (dispatch) => {
-    API.addPost(post).then(() => callback())
+    API.addPost(post).then(() => callback());
     dispatch({
       type: ADD_POST,
       post
-    })
+    });
   }
 }

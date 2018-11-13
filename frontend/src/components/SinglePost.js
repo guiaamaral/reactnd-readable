@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import _ from 'lodash';
 import { capitalize, timestampToDate } from '../utils/helpers';
-import Divider from '@material-ui/core/Divider';
 import { fetchPosts } from '../actions/posts';
 import { fetchComments } from '../actions/comments';
 import PostComments from './PostComments';

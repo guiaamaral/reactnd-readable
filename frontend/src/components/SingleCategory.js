@@ -22,6 +22,7 @@ class SingleCategory extends Component {
   }
 
   render() {
+    const currentCategory = this.props.match.params.name;
     const { categories, posts } = this.props
     return (
       <div>
@@ -31,7 +32,7 @@ class SingleCategory extends Component {
           </Grid>
           <Grid item xs={12} md={9}>
             <List component="nav">
-              {posts && posts.map(post => (
+              {posts && posts.filter(post => post.category === currentCategory).map(post => (
                 <ListItem button key={post.id} component={Link} to={(`/post/${post.id}`)}>
                   <Grid item xs={12}>
                     <h2>{capitalize(post.title)}</h2>

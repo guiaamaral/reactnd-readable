@@ -22,7 +22,7 @@ class ListCategories extends Component {
           </ListItem>
           <Divider />
           {categories && categories.map(category => (
-            <ListItem button key={category.name} component={Link} to={`/category/${category.path}`}>
+            <ListItem button key={category.name} component={Link} to={`/${category.path}`}>
               <ListItemText primary={capitalize(category.name)} />
             </ListItem>
           ))}

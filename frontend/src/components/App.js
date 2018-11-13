@@ -18,19 +18,20 @@ const theme = createMuiTheme({
 
 class App extends Component {
   render() {
-    const currentPath = window.location.pathname
+    const currentPath = window.location.pathname;
+
     return (
       <MuiThemeProvider theme={theme}>
         <Header />
         <Route exact path="/" component={Home} />
-        <Route exact path="/category/:name" component={SingleCategory} />
-        <Route exact path="/post/:postId" component={SinglePost} />
+        <Route exact path="/:category" component={SingleCategory} />
+        <Route exact path="/:category/:postId" component={SinglePost} />
+        <Route exact path="/:category/:postId/comment" component={AddComment} />
         <Route exact path="/add-post" component={AddPost} />
-        <Route exact path="/post/:postId/comment" component={AddComment} />
-        {currentPath.includes('post') ?
+        {currentPath.includes('add-post') || currentPath.includes('comment') ?
           <div></div>
         :
-          <Button variant="fab" color="primary" component={Link} to="/add-post">
+          <Button variant="fab" color="primary" component={Link} className="add-button" to="/add-post">
             <AddIcon />
           </Button>
         }

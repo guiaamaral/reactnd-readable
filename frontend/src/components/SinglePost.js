@@ -35,7 +35,7 @@ class SinglePost extends Component {
                 <p>{post.body}</p>
                 <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
                 <br/>
-                <Button color="primary" variant="contained" component={Link} to={`/post/${post.id}/comment`}>
+                <Button color="primary" variant="contained" component={Link} to={`/${post.category}/${post.id}/comment`}>
                   Add a comment
                 </Button>
                 {comments && <PostComments comments={comments}/>}

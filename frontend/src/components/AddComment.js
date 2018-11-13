@@ -16,6 +16,7 @@ class AddComment extends Component {
   addComment = (e) => {
     e.preventDefault();
     const postId = this.props.match.params.postId;
+    const category = this.props.match.params.category;
 
     const newComment = {
       id: uuid(),
@@ -24,7 +25,7 @@ class AddComment extends Component {
       author: e.target.author.value,
       parentId: postId
     }
-    this.props.addComment(newComment, postId, () => this.props.history.push(`/post/${postId}`));
+    this.props.addComment(newComment, postId, () => this.props.history.push(`/${category}/${postId}`));
   };
 
   render() {

@@ -7,3 +7,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.add-button {
+  position: fixed !important;
+  bottom: 16px;
+  right: 16px;
+}

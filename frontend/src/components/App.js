@@ -6,6 +6,7 @@ import Home from './Home';
 import SingleCategory from './SingleCategory';
 import SinglePost from './SinglePost';
 import AddPost from './AddPost';
+import EditPost from './EditPost';
 import AddComment from './AddComment';
 import EditComment from './EditComment';
 
@@ -23,6 +24,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/:category" component={SingleCategory} />
         <Route exact path="/:category/:postId" component={SinglePost} />
+        <Route exact path="/:category/:postId/edit" component={EditPost} />
         <Route exact path="/:category/:postId/comment" component={AddComment} />
         <Route exact path="/:category/:postId/:commentId/edit" component={EditComment} />
         <Route exact path="/add-post" component={AddPost} />

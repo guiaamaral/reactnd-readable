@@ -25,7 +25,9 @@ class AddComment extends Component {
       author: e.target.author.value,
       parentId: postId
     }
-    this.props.addComment(newComment, postId, () => this.props.history.push(`/${category}/${postId}`));
+    this.props.addComment(newComment, postId,
+      () => this.props.history.push(`/${category}/${postId}`)
+    );
   };
 
   render() {

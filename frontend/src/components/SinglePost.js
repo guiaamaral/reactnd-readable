@@ -45,7 +45,7 @@ class SinglePost extends Component {
                 <p>{post.body}</p>
                 <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
                 <br/>
-                <Button color="default" variant="contained" className="edit-post">
+                <Button color="default" variant="contained" className="edit-post" component={Link} to={`/${post.category}/${post.id}/edit`}>
                   <EditIcon />
                 </Button>
                 <Button color="secondary" variant="contained" onClick={(e) => this.onDeletePost(e)}>

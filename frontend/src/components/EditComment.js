@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -14,10 +13,6 @@ class EditComment extends Component {
     posts: PropTypes.array,
     comments: PropTypes.array,
   };
-
-  componentDidMount() {
-    this.props.fetchComments(this.props.match.params.postId)
-  }
 
   editComment = (e) => {
     e.preventDefault();
@@ -58,9 +53,6 @@ class EditComment extends Component {
               <Grid item xs={12}>
                 <Button type="submit" variant="contained" color="primary">
                   Submit
-                </Button>
-                <Button component={Link} to={`/post/${this.props.comment.parentId}`}>
-                  Cancel
                 </Button>
               </Grid>
             </Grid>

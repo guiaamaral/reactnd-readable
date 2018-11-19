@@ -4,7 +4,9 @@ import {
 } from '../actions/categories';
 import {
   GET_POSTS,
-  ADD_POST
+  ADD_POST,
+  EDIT_POST,
+  DELETE_POST
 } from '../actions/posts';
 import {
   GET_COMMENTS,
@@ -23,11 +25,21 @@ function categories(state = [], action) {
 }
 
 function posts(state = [], action) {
+  const { posts, post, postId, editPost } = action
   switch(action.type) {
     case GET_POSTS :
-      return action.posts
+      return posts
     case ADD_POST:
-      return state.concat(action.post)
+      return state.concat(post)
+    case EDIT_POST:
+      return state.map(post => {
+        if(post.id === postId) {
+          post = editPost
+        }
+        return post
+      })
+    case DELETE_POST:
+      return state
     default :
       return state
   }

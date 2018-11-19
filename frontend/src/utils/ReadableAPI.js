@@ -32,6 +32,14 @@ export const addPost = (newPost) => {
   .then(res => res.json());
 }
 
+export const deletePost = (postId) => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+    .then(res => res.json())
+}
+
 export const fetchComments = (postId) => {
   return fetch(`${api}/posts/${postId}/comments`, { headers })
     .then(res => res.json());
@@ -47,4 +55,12 @@ export const addComment = (newComment) => {
     body: JSON.stringify(newComment)
   })
   .then(res => res.json());
+}
+
+export const deleteComment = (commentId) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'DELETE',
+    headers: headers
+  })
+    .then(res => res.json())
 }

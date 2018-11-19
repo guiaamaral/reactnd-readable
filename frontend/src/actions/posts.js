@@ -2,6 +2,7 @@ import * as API from '../utils/ReadableAPI';
 
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 export const fetchPosts = () => {
   return(dispatch) => {
@@ -20,6 +21,16 @@ export const addPost = (post, callback) => {
     dispatch({
       type: ADD_POST,
       post
+    });
+  }
+}
+
+export const deletePost = (postId, callback) => {
+  return dispatch => {
+    API.deletePost(postId).then(() => callback());
+    dispatch({
+      type: DELETE_POST,
+      postId
     });
   }
 }

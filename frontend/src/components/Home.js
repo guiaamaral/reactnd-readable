@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
+import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
+import AddIcon from '@material-ui/icons/Add';
 import { capitalize, timestampToDate } from '../utils/helpers';
 import { fetchCategories } from '../actions/categories';
 import { fetchPosts } from '../actions/posts';
@@ -42,6 +44,9 @@ class Home extends Component {
               ))}
             </List>
           </Grid>
+          <Button variant="extendedFab" color="primary" component={Link} className="add-button" to="/add-post">
+            <AddIcon /> Add new post
+          </Button>
         </Grid>
       </div>
     );

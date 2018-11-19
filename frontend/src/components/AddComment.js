@@ -31,7 +31,9 @@ class AddComment extends Component {
   render() {
     return (
       <Grid container spacing={24}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={2}>
+        </Grid>
+        <Grid item xs={12} md={8}>
           <Typography variant="h2" color="inherit">
             Add a comment
           </Typography>
@@ -62,6 +64,8 @@ class AddComment extends Component {
               </Grid>
             </Grid>
           </form>
+        </Grid>
+        <Grid item xs={12} md={2}>
         </Grid>
       </Grid>
     );

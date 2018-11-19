@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import Header from './Header';
 import Home from './Home';
 import SingleCategory from './SingleCategory';
@@ -18,8 +16,6 @@ const theme = createMuiTheme({
 
 class App extends Component {
   render() {
-    const currentPath = window.location.pathname;
-
     return (
       <MuiThemeProvider theme={theme}>
         <Header />
@@ -28,13 +24,6 @@ class App extends Component {
         <Route exact path="/:category/:postId" component={SinglePost} />
         <Route exact path="/:category/:postId/comment" component={AddComment} />
         <Route exact path="/add-post" component={AddPost} />
-        {currentPath.includes('add-post') || currentPath.includes('comment') ?
-          <div></div>
-        :
-          <Button variant="fab" color="primary" component={Link} className="add-button" to="/add-post">
-            <AddIcon />
-          </Button>
-        }
       </MuiThemeProvider>
     );
   }

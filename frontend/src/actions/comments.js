@@ -2,6 +2,7 @@ import * as API from '../utils/ReadableAPI';
 
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const fetchComments = (postId) => {
   return(dispatch) => {
@@ -17,7 +18,7 @@ export const fetchComments = (postId) => {
 
 export const addComment = (comment, parentId, callback) => {
   return (dispatch) => {
-    API.addComment(comment).then( comment => {
+    API.addComment(comment).then(comment => {
       dispatch({
         type: ADD_COMMENT,
         parentId,
@@ -25,5 +26,15 @@ export const addComment = (comment, parentId, callback) => {
       })
     })
     .then(() => callback());
+  }
+}
+
+export const deleteComment = (commentId, callback) => {
+  return (dispatch) => {
+    API.deleteComment(commentId).then(() => callback());
+    dispatch({
+      type: DELETE_COMMENT,
+      commentId
+    });
   }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
@@ -27,10 +28,10 @@ class PostComments extends Component {
           <div className="comment" key={comment.id}>
             <p>{comment.body}</p>
             <small>Posted on <b>{timestampToDate(comment.timestamp)}</b> by <b>{comment.author}</b></small>
-            <Button variant="outline" className="edit-comment">
+            <Button variant="outlined" className="edit-comment" component={Link} to={`/${this.props.category}/${comment.parentId}/${comment.id}/edit`}>
               <EditIcon />
             </Button>
-            <Button variant="outline" className="delete-comment" onClick={() => this.onDeleteComment(comment)}>
+            <Button variant="outlined" className="delete-comment" onClick={() => this.onDeleteComment(comment)}>
               <DeleteIcon />
             </Button>
             <Divider />

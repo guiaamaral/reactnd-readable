@@ -8,7 +8,9 @@ import {
 } from '../actions/posts';
 import {
   GET_COMMENTS,
-  ADD_COMMENT
+  ADD_COMMENT,
+  EDIT_COMMENT,
+  DELETE_COMMENT
 } from '../actions/comments';
 
 function categories(state = [], action) {
@@ -32,12 +34,24 @@ function posts(state = [], action) {
 }
 
 function comments(state = [], action) {
-  const { comments, postId } = action
+  const { comments, commentId, editComment, postId } = action
   switch(action.type) {
     case GET_COMMENTS :
       return Object.assign({}, state, {[postId]: comments})
     case ADD_COMMENT:
       return Object.assign({}, state, {[postId]: comments})
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        [postId]: state[postId].map(comment => {
+          if(comment.id === commentId) {
+            comment = editComment
+          }
+          return comment
+        })
+      }
+    case DELETE_COMMENT:
+      return state
     default :
       return state
   }

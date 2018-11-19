@@ -51,7 +51,7 @@ class SinglePost extends Component {
                 <Button color="secondary" variant="contained" onClick={(e) => this.onDeletePost(e)}>
                   <DeleteIcon />
                 </Button>
-                {comments && <PostComments comments={comments}/>}
+                {comments && <PostComments category={post.category} comments={comments}/>}
                 <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
                   <CommentIcon /> Add a Comment
                 </Button>

@@ -1,15 +1,20 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import UpIcon from '@material-ui/icons/ArrowDropUp';
+import DownIcon from '@material-ui/icons/ArrowDropDown';
 import CommentIcon from '@material-ui/icons/Chat';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import _ from 'lodash';
+import VertIcon from '@material-ui/icons/MoreVert';
 import { capitalize, timestampToDate } from '../utils/helpers';
-import { fetchPosts, deletePost } from '../actions/posts';
+import { fetchPosts, votePost, deletePost } from '../actions/posts';
 import { fetchComments } from '../actions/comments';
 import PostComments from './PostComments';
 
@@ -25,6 +30,18 @@ class SinglePost extends Component {
     this.props.fetchComments(this.props.match.params.postId);
   }
 
+  state = {
+    anchorEl: null
+  };
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   onDeletePost = () => {
     const postId = this.props.match.params.postId;
     this.props.deletePost(postId, () => {
@@ -33,30 +50,60 @@ class SinglePost extends Component {
   }
 
   render() {
-    const { comments, post } = this.props
+    const { comments, post, fetchPosts, votePost } = this.props;
+    const { anchorEl } = this.state;
+
     return (
       <div>
-        <Grid container spacing={24}>
+        <Grid container>
           <Grid item xs={12} md={2}>
           </Grid>
-            {post && (
-              <Grid item xs={12} md={8} key={post.id}>
-                <h2>{capitalize(post.title)}</h2>
-                <p>{post.body}</p>
-                <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
-                <br/>
-                <Button color="default" variant="contained" className="edit-post" component={Link} to={`/${post.category}/${post.id}/edit`}>
-                  <EditIcon />
-                </Button>
-                <Button color="secondary" variant="contained" onClick={(e) => this.onDeletePost(e)}>
-                  <DeleteIcon />
-                </Button>
-                {comments && <PostComments category={post.category} comments={comments}/>}
-                <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
-                  <CommentIcon /> Add a Comment
-                </Button>
+          <Grid item xs={12} md={8}>
+          {post && (
+            <Paper elevation={1} key={post.id}>
+              <Grid container className="single-post">
+                <Grid item xs={1} className="vote-single">
+                  <UpIcon className="vote-up" onClick={() => {
+                    votePost(post.id, "upVote");
+                    fetchPosts();
+                  }} />
+                  <p className="vote-note">{post.voteScore}</p>
+                  <DownIcon className="vote-down" onClick={() => {
+                    votePost(post.id, "downVote");
+                    fetchPosts();
+                  }} />
+                </Grid>
+                <Grid item xs={11}>
+                  <IconButton
+                    aria-owns={anchorEl ? 'simple-menu' : undefined}
+                    aria-haspopup="true"
+                    onClick={this.handleClick}
+                    className="post-options"
+                  >
+                    <VertIcon />
+                  </IconButton>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleClose}
+                  >
+                    <MenuItem component={Link} to={`/${post.category}/${post.id}/edit`}>Edit</MenuItem>
+                    <MenuItem onClick={(e) => this.onDeletePost(e)}>Delete</MenuItem>
+                  </Menu>
+                  <h2>{capitalize(post.title)}</h2>
+                  <p>{post.body}</p>
+                  <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
+                  <br/>
+                </Grid>
               </Grid>
-            )}
+              {comments && <PostComments category={post.category} comments={comments}/>}
+              <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
+                <CommentIcon /> Add a Comment
+              </Button>
+            </Paper>
+          )}
+          </Grid>
           <Grid item xs={12} md={2}>
           </Grid>
         </Grid>
@@ -75,6 +122,7 @@ function mapStateToProps({ posts, comments }, { match }) {
 
 export default connect(mapStateToProps, {
   fetchPosts,
+  votePost,
   deletePost,
   fetchComments
 })(SinglePost);

@@ -44,12 +44,27 @@ export const editPost = (postId, editedPost) => {
   .then(res => res.json());
 }
 
+export const votePost = (postId, option) => {
+  return fetch(`${api}/posts/${postId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({option})
+  })
+  .then(res => res.json());
+}
+
 export const deletePost = (postId) => {
   return fetch(`${api}/posts/${postId}`, {
     method: 'DELETE',
-    headers: headers
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
   })
-    .then(res => res.json())
+  .then(res => res.json())
 }
 
 export const fetchComments = (postId) => {
@@ -81,10 +96,25 @@ export const editComment = (commentId, editedComment) => {
   .then(res => res.json());
 }
 
+export const voteComment = (commentId, option) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({option})
+  })
+    .then(res => res.json())
+}
+
 export const deleteComment = (commentId) => {
   return fetch(`${api}/comments/${commentId}`, {
     method: 'DELETE',
-    headers: headers
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
   })
     .then(res => res.json())
 }

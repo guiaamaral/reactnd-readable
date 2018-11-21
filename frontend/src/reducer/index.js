@@ -6,12 +6,14 @@ import {
   GET_POSTS,
   ADD_POST,
   EDIT_POST,
+  VOTE_POST,
   DELETE_POST
 } from '../actions/posts';
 import {
   GET_COMMENTS,
   ADD_COMMENT,
   EDIT_COMMENT,
+  VOTE_COMMENT,
   DELETE_COMMENT
 } from '../actions/comments';
 
@@ -25,7 +27,7 @@ function categories(state = [], action) {
 }
 
 function posts(state = [], action) {
-  const { posts, post, postId, editPost } = action
+  const { posts, post, postId, editPost, option } = action
   switch(action.type) {
     case GET_POSTS :
       return posts
@@ -35,6 +37,18 @@ function posts(state = [], action) {
       return state.map(post => {
         if(post.id === postId) {
           post = editPost
+        }
+        return post
+      })
+    case VOTE_POST:
+      return state.map(post => {
+        if (post.id === action.postId) {
+          if (option === "upVote") {
+            post.voteScore += 1
+          }
+          if (option === "downVote") {
+            post.voteScore -= 1
+          }
         }
         return post
       })
@@ -53,6 +67,16 @@ function comments(state = [], action) {
     case ADD_COMMENT:
       return Object.assign({}, state, {[postId]: comments})
     case EDIT_COMMENT:
+      return {
+        ...state,
+        [postId]: state[postId].map(comment => {
+          if(comment.id === commentId) {
+            comment = editComment
+          }
+          return comment
+        })
+      }
+    case VOTE_COMMENT:
       return {
         ...state,
         [postId]: state[postId].map(comment => {

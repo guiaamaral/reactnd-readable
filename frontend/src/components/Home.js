@@ -6,9 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import UpIcon from '@material-ui/icons/ArrowDropUp';
+import DownIcon from '@material-ui/icons/ArrowDropDown';
 import { capitalize, timestampToDate } from '../utils/helpers';
 import { fetchCategories } from '../actions/categories';
-import { fetchPosts } from '../actions/posts';
+import { fetchPosts, votePost } from '../actions/posts';
 import ListCategories from './ListCategories';
 
 class Home extends Component {
@@ -23,20 +25,33 @@ class Home extends Component {
   }
 
   render() {
-    const { categories, posts } = this.props
+    const { categories, posts, fetchPosts, votePost } = this.props
     return (
       <div>
-        <Grid container spacing={24}>
+        <Grid container>
           <Grid item xs={12} md={3}>
             <ListCategories categories={categories} />
           </Grid>
           <Grid item xs={12} md={9}>
             {posts && posts.map(post => (
-              <Paper elevation={1} key={post.id}>
-                <Grid item xs={12}>
-                  <h2><Link to={(`/${post.category}/${post.id}`)}>{capitalize(post.title)}</Link></h2>
-                  <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
-                  <p>{post.body}</p>
+              <Paper elevation={1} key={post.id} className="post">
+                <Grid container>
+                  <Grid item xs={1} className="vote">
+                    <UpIcon className="vote-up" onClick={() => {
+                      votePost(post.id, "upVote");
+                      fetchPosts();
+                    }} />
+                    <p className="vote-note">{post.voteScore}</p>
+                    <DownIcon className="vote-down" onClick={() => {
+                      votePost(post.id, "downVote");
+                      fetchPosts();
+                    }} />
+                  </Grid>
+                  <Grid item xs={11}>
+                    <Link to={(`/${post.category}/${post.id}`)}><h2>{capitalize(post.title)}</h2></Link>
+                    <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
+                    <p>{post.body}</p>
+                  </Grid>
                 </Grid>
               </Paper>
             ))}
@@ -59,5 +74,6 @@ function mapStateToProps({ categories, posts }) {
 
 export default connect(mapStateToProps, {
   fetchCategories,
-  fetchPosts
+  fetchPosts,
+  votePost
 })(Home);

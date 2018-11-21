@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -48,13 +48,12 @@ class AddPost extends Component {
     const { categories } = this.props
     return (
       <div>
-        <Grid container spacing={24}>
+        <Grid container>
           <Grid item xs={12} md={2}>
           </Grid>
-            <Grid item xs={12} md={8}>
-              <Typography variant="h2" color="inherit">
-                Create a new post
-              </Typography>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={1} className="add-edit">
+              <h2>Create a new post</h2>
               <form autoComplete="off" onSubmit={this.addPost}>
                 <Grid container spacing={24}>
                   <Grid item xs={12}>
@@ -110,7 +109,8 @@ class AddPost extends Component {
                   </Grid>
                 </Grid>
               </form>
-            </Grid>
+            </Paper>
+          </Grid>
           <Grid item xs={12} md={2}>
           </Grid>
         </Grid>

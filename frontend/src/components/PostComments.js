@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import UpIcon from '@material-ui/icons/ArrowDropUp';
+import DownIcon from '@material-ui/icons/ArrowDropDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import * as commentActions from '../actions/comments'
@@ -21,21 +22,31 @@ class PostComments extends Component {
   }
 
   render() {
-    const { comments } = this.props
+    const { comments, fetchComments, voteComment } = this.props
     return (
       <div>
         {comments && comments.map(comment => (
-          <div className="comment" key={comment.id}>
+        <Grid container key={comment.id} className="comment-container">
+          <Grid item xs={1} className="vote-comment">
+            <UpIcon className="vote-up" onClick={() => {
+              voteComment(comment.id, comment.parentId, "upVote");
+              fetchComments();
+            }} />
+            <p className="vote-note">{comment.voteScore}</p>
+            <DownIcon className="vote-down" onClick={() => {
+              voteComment(comment.id, comment.parentId, "downVote");
+              fetchComments();
+            }} />
+          </Grid>
+          <Grid item xs={11} className="comment">
             <p>{comment.body}</p>
             <small>Posted on <b>{timestampToDate(comment.timestamp)}</b> by <b>{comment.author}</b></small>
-            <Button variant="outlined" className="edit-comment" component={Link} to={`/${this.props.category}/${comment.parentId}/${comment.id}/edit`}>
-              <EditIcon />
-            </Button>
-            <Button variant="outlined" className="delete-comment" onClick={() => this.onDeleteComment(comment)}>
-              <DeleteIcon />
-            </Button>
-            <Divider />
-          </div>
+              <Link to={`/${this.props.category}/${comment.parentId}/${comment.id}/edit`} className="edit-comment">
+                <EditIcon />
+              </Link>
+              <DeleteIcon className="delete-comment" onClick={() => this.onDeleteComment(comment)} />
+          </Grid>
+        </Grid>
         ))}
       </div>
     );

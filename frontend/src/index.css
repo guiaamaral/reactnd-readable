@@ -6,25 +6,106 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f5f5f5;
+}
+.menu {
+  width: 1em;
+  height: 1em;
+}
+.post {
+  margin-top: 16px;
+}
+.add-edit {
+  margin-top: 16px;
+  padding: 16px;
 }
 .add-button {
   position: fixed !important;
   bottom: 16px;
   right: 16px;
 }
-.edit-post {
-  margin-right: 12px !important;
+.post-options {
+  position: absolute !important;
+  right: 0px !important;
+}
+.single-post {
+  margin-top: 16px;
+  position: relative;
+  padding: 8px 0 16px;
+}
+.single-post h2 {
+  margin-top: 8px;
+}
+.comment-container {
+  border-top: 1px solid #ccc;
+  padding-bottom: 10px;
 }
 .comment {
   position: relative;
 }
 .edit-comment {
   position: absolute !important;
-  right: 72px;
-  top: 0;
+  right: 44px;
+  top: 14px;
+  cursor: pointer;
+  color: #333;
 }
 .delete-comment {
   position: absolute !important;
-  right: 0;
-  top: 0;
+  right: 12px;
+  top: 14px;
+  cursor: pointer;
+  color: #333;
+}
+.vote,
+.vote-single,
+.vote-comment {
+  position: relative;
+}
+.vote-note {
+  position: absolute;
+  top: 30%;
+  width: 100%;
+  text-align: center;
+}
+.vote-up,
+.vote-down {
+  position: absolute;
+  left: 22%;
+  width: 2em !important;
+  height: 2em !important;
+}
+.vote-up {
+  top: 10px;
+  cursor: pointer;
+}
+.vote-down {
+  bottom: 10px;
+  cursor: pointer;
+}
+.vote-single .vote-up,
+.vote-single .vote-down,
+.vote-comment .vote-up,
+.vote-comment .vote-down {
+  position: absolute;
+  left: 34%;
+  width: 1em !important;
+  height: 1em !important;
+}
+.vote-single .vote-up,
+.vote-comment .vote-up {
+  top: 6px;
+}
+.vote-single .vote-down {
+  top: calc(40% + 6px);
+}
+.vote-single .vote-note,
+.vote-comment .vote-note {
+  position: absolute;
+  top: 12%;
+  width: 100%;
+  text-align: center;
+}
+.vote-comment .vote-down {
+  bottom: 6px;
 }

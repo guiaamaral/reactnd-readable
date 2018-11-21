@@ -21,6 +21,9 @@ class ListCategories extends Component {
             <ListItemText primary="Categories" />
           </ListItem>
           <Divider />
+            <ListItem button component={Link} to="/">
+              <ListItemText primary="All" />
+            </ListItem>
           {categories && categories.map(category => (
             <ListItem button key={category.name} component={Link} to={`/${category.path}`}>
               <ListItemText primary={capitalize(category.name)} />

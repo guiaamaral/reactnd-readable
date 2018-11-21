@@ -3,7 +3,9 @@ import * as API from '../utils/ReadableAPI';
 export const GET_POSTS = 'GET_POSTS';
 export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
+export const VOTE_POST = 'VOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
+
 
 export const fetchPosts = () => {
   return(dispatch) => {
@@ -36,6 +38,18 @@ export const editPost = (postId, editedPost, callback) => {
       })
     })
     .then(() => callback());
+  }
+}
+
+export const votePost = (postId, option) => {
+  return (dispatch) => {
+    API.votePost(postId, option).then(post => {
+      dispatch({
+        type: VOTE_POST,
+        postId,
+        option
+      })
+    })
   }
 }
 

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
@@ -30,13 +30,12 @@ class EditComment extends Component {
 
   render() {
     return (
-      <Grid container spacing={24}>
+      <Grid container>
         <Grid item xs={12} md={2}>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Typography variant="h2" color="inherit">
-            Edit comment
-          </Typography>
+          <Paper elevation={1} className="add-edit">
+          <h2>Edit comment</h2>
           <form autoComplete="off" onSubmit={this.editComment}>
             <Grid container spacing={24}>
               <Grid item xs={12}>
@@ -57,6 +56,7 @@ class EditComment extends Component {
               </Grid>
             </Grid>
           </form>
+          </Paper>
         </Grid>
         <Grid item xs={12} md={2}>
         </Grid>

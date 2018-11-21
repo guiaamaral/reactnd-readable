@@ -10,7 +10,7 @@ const Header = () => (
     <AppBar position="static">
       <Toolbar>
         <IconButton color="inherit" aria-label="Menu">
-          <MenuIcon />
+          <MenuIcon className="menu" />
         </IconButton>
         <Typography variant="h6" color="inherit">
           Readable

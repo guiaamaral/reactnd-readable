@@ -8,6 +8,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #f5f5f5;
 }
+.text-center {
+  text-align: center;
+}
 .menu {
   width: 1em;
   height: 1em;

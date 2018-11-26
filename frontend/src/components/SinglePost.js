@@ -47,11 +47,34 @@ class SinglePost extends Component {
     this.props.deletePost(postId, () => {
       this.props.history.push('/')
     })
-  }
+  };
 
   render() {
     const { comments, post, fetchPosts, votePost } = this.props;
     const { anchorEl } = this.state;
+
+    if(!post) {
+      return (
+      <div>
+        <Grid container>
+          <Grid item xs={12} md={2}>
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={1} key={404}>
+              <Grid container className="single-post">
+                <Grid item xs={12} className="vote-single">
+                  <h2 className="text-center">404</h2>
+                  <p className="text-center">Post Not Found</p>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={2}>
+          </Grid>
+        </Grid>
+      </div>
+      )
+    }
 
     return (
       <div>

@@ -12,6 +12,11 @@ body {
   width: 1em;
   height: 1em;
 }
+.sort-by {
+  direction: rtl;
+  margin-right: 10px;
+  margin-top: 10px;
+}
 .post {
   margin-top: 16px;
 }
@@ -64,7 +69,7 @@ body {
 }
 .vote-note {
   position: absolute;
-  top: 30%;
+  top: 45px;
   width: 100%;
   text-align: center;
 }
@@ -80,7 +85,7 @@ body {
   cursor: pointer;
 }
 .vote-down {
-  bottom: 10px;
+  top: 84px;
   cursor: pointer;
 }
 .vote-single .vote-up,
@@ -97,15 +102,18 @@ body {
   top: 6px;
 }
 .vote-single .vote-down {
-  top: calc(40% + 6px);
+  top: 66px;
 }
 .vote-single .vote-note,
 .vote-comment .vote-note {
   position: absolute;
-  top: 12%;
+  top: 20px;
   width: 100%;
   text-align: center;
 }
+.vote-comment .vote-note {
+  top: 12px;
+}
 .vote-comment .vote-down {
-  bottom: 6px;
+  top: 48px;
 }

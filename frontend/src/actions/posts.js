@@ -5,10 +5,10 @@ export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const VOTE_POST = 'VOTE_POST';
 export const DELETE_POST = 'DELETE_POST';
-
+export const SORT_BY = 'SORT_BY';
 
 export const fetchPosts = () => {
-  return(dispatch) => {
+  return (dispatch) => {
     API.fetchPosts().then(posts => {
       dispatch({
         type: GET_POSTS,
@@ -48,17 +48,26 @@ export const votePost = (postId, option) => {
         type: VOTE_POST,
         postId,
         option
-      })
-    })
+      });
+    });
   }
 }
 
 export const deletePost = (postId, callback) => {
-  return dispatch => {
+  return (dispatch) => {
     API.deletePost(postId).then(() => callback());
     dispatch({
       type: DELETE_POST,
       postId
+    });
+  }
+}
+
+export const sortPost = (orderBy) => {
+  return dispatch => {
+    dispatch({
+      type: SORT_BY,
+      orderBy
     });
   }
 }

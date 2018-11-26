@@ -5,18 +5,29 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import AddIcon from '@material-ui/icons/Add';
 import UpIcon from '@material-ui/icons/ArrowDropUp';
 import DownIcon from '@material-ui/icons/ArrowDropDown';
 import { capitalize, timestampToDate } from '../utils/helpers';
 import { fetchCategories } from '../actions/categories';
-import { fetchPosts, votePost } from '../actions/posts';
+import { fetchPosts, votePost, sortPost } from '../actions/posts';
 import ListCategories from './ListCategories';
 
 class SingleCategory extends Component {
   static propTypes = {
     categories: PropTypes.array,
     posts: PropTypes.array
+  }
+  state = {
+    value: ''
+  }
+
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+    this.props.sortPost(event.target.value);
   }
 
   componentDidMount() {
@@ -34,6 +45,25 @@ class SingleCategory extends Component {
             <ListCategories categories={categories} />
           </Grid>
           <Grid item xs={12} md={9}>
+            <form className="sort-by" autoComplete="off">
+              <FormControl>
+                <Select
+                  inputProps={{
+                    name: 'sort-by',
+                    id: 'sort-by',
+                  }}
+                  value={this.state.value}
+                  onChange={this.handleChange}
+                  displayEmpty
+                >
+                  <MenuItem value="">
+                    <em>Sort By</em>
+                  </MenuItem>
+                  <MenuItem value="timestamp">Date</MenuItem>
+                  <MenuItem value="voteScore">Vote Score</MenuItem>
+                </Select>
+              </FormControl>
+            </form>
             {posts && posts.filter(post => post.category === currentCategory).map(post => (
               <Paper elevation={1} key={post.id} className="post">
                 <Grid container>
@@ -50,7 +80,7 @@ class SingleCategory extends Component {
                   </Grid>
                   <Grid item xs={11}>
                     <Link to={(`/${post.category}/${post.id}`)}><h2>{capitalize(post.title)}</h2></Link>
-                    <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
+                    <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / <u>{post.commentCount} comments</u></small>
                     <p>{post.body}</p>
                   </Grid>
                 </Grid>
@@ -76,5 +106,6 @@ function mapStateToProps({ categories, posts }) {
 export default connect(mapStateToProps, {
   fetchCategories,
   fetchPosts,
+  sortPost,
   votePost
 })(SingleCategory);

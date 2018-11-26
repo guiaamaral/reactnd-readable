@@ -1,3 +1,4 @@
+import arraySort from 'array-sort';
 import { combineReducers } from 'redux';
 import {
   GET_CATEGORIES
@@ -7,7 +8,8 @@ import {
   ADD_POST,
   EDIT_POST,
   VOTE_POST,
-  DELETE_POST
+  DELETE_POST,
+  SORT_BY
 } from '../actions/posts';
 import {
   GET_COMMENTS,
@@ -27,7 +29,7 @@ function categories(state = [], action) {
 }
 
 function posts(state = [], action) {
-  const { posts, post, postId, editPost, option } = action
+  const { posts, post, postId, editPost, option, orderBy  } = action
   switch(action.type) {
     case GET_POSTS :
       return posts
@@ -54,6 +56,8 @@ function posts(state = [], action) {
       })
     case DELETE_POST:
       return state
+    case SORT_BY:
+      return [].concat(arraySort(state, orderBy, {reverse: true}))
     default :
       return state
   }

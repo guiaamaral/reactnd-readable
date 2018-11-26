@@ -93,7 +93,7 @@ class SinglePost extends Component {
                   </Menu>
                   <h2>{capitalize(post.title)}</h2>
                   <p>{post.body}</p>
-                  <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / {post.commentCount} comments</small>
+                  <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / <u>{post.commentCount} comments</u></small>
                   <br/>
                 </Grid>
               </Grid>

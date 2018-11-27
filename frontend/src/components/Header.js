@@ -12,7 +12,7 @@ class Header extends Component {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <div class="back-icon">
+            <div className="back-icon">
               <IconButton color="inherit" aria-label="Back" component={Link} to="/">
                 <LeftArrowIcon className="menu" />
               </IconButton>

@@ -34,7 +34,9 @@ function posts(state = [], action) {
     case GET_POSTS :
       return posts
     case ADD_POST:
-      return state.concat(post)
+      return {
+        ...state.post
+      }
     case EDIT_POST:
       return state.map(post => {
         if(post.id === postId) {
@@ -44,7 +46,7 @@ function posts(state = [], action) {
       })
     case VOTE_POST:
       return state.map(post => {
-        if (post.id === action.postId) {
+        if (post.id === postId) {
           if (option === "upVote") {
             post.voteScore += 1
           }
@@ -64,18 +66,39 @@ function posts(state = [], action) {
 }
 
 function comments(state = [], action) {
-  const { comments, commentId, editComment, postId } = action
+  const { comments, commentId, editComment, option, postId } = action
   switch(action.type) {
     case GET_COMMENTS :
-      return Object.assign({}, state, {[postId]: comments})
+      return {
+        ...state,
+        [postId]: comments
+      }
     case ADD_COMMENT:
-      return Object.assign({}, state, {[postId]: comments})
+      return {
+        ...state,
+        [postId]: comments
+      }
     case EDIT_COMMENT:
       return {
         ...state,
         [postId]: state[postId].map(comment => {
           if(comment.id === commentId) {
             comment = editComment
+          }
+          return comment
+        })
+      }
+    case VOTE_COMMENT:
+      return {
+        ...state,
+        [postId]: state[postId].map(comment => {
+          if (comment.id === commentId) {
+            if (option === "upVote") {
+              comment.voteScore += 1
+            }
+            if (option === "downVote") {
+              comment.voteScore -= 1
+            }
           }
           return comment
         })

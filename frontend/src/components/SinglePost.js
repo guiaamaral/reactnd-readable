@@ -74,64 +74,64 @@ class SinglePost extends Component {
         </Grid>
       </div>
       )
+    } else {
+      return (
+        <div>
+          <Grid container>
+            <Grid item xs={12} md={2}>
+            </Grid>
+            <Grid item xs={12} md={8}>
+            {post && (
+              <Paper elevation={1} key={post.id}>
+                <Grid container className="single-post">
+                  <Grid item xs={1} className="vote-single">
+                    <UpIcon className="vote-up" onClick={() => {
+                      votePost(post.id, "upVote");
+                      fetchPosts();
+                    }} />
+                    <p className="vote-note">{post.voteScore}</p>
+                    <DownIcon className="vote-down" onClick={() => {
+                      votePost(post.id, "downVote");
+                      fetchPosts();
+                    }} />
+                  </Grid>
+                  <Grid item xs={11}>
+                    <IconButton
+                      aria-owns={anchorEl ? 'simple-menu' : undefined}
+                      aria-haspopup="true"
+                      onClick={this.handleClick}
+                      className="post-options"
+                    >
+                      <VertIcon />
+                    </IconButton>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      open={Boolean(anchorEl)}
+                      onClose={this.handleClose}
+                    >
+                      <MenuItem component={Link} to={`/${post.category}/${post.id}/edit`}>Edit</MenuItem>
+                      <MenuItem onClick={(e) => this.onDeletePost(e)}>Delete</MenuItem>
+                    </Menu>
+                    <h2>{capitalize(post.title)}</h2>
+                    <p>{post.body}</p>
+                    <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / <u>{post.commentCount} comments</u></small>
+                    <br/>
+                  </Grid>
+                </Grid>
+                {comments && <PostComments category={post.category} comments={comments}/>}
+                <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
+                  <CommentIcon /> Add a Comment
+                </Button>
+              </Paper>
+            )}
+            </Grid>
+            <Grid item xs={12} md={2}>
+            </Grid>
+          </Grid>
+        </div>
+      );
     }
-
-    return (
-      <div>
-        <Grid container>
-          <Grid item xs={12} md={2}>
-          </Grid>
-          <Grid item xs={12} md={8}>
-          {post && (
-            <Paper elevation={1} key={post.id}>
-              <Grid container className="single-post">
-                <Grid item xs={1} className="vote-single">
-                  <UpIcon className="vote-up" onClick={() => {
-                    votePost(post.id, "upVote");
-                    fetchPosts();
-                  }} />
-                  <p className="vote-note">{post.voteScore}</p>
-                  <DownIcon className="vote-down" onClick={() => {
-                    votePost(post.id, "downVote");
-                    fetchPosts();
-                  }} />
-                </Grid>
-                <Grid item xs={11}>
-                  <IconButton
-                    aria-owns={anchorEl ? 'simple-menu' : undefined}
-                    aria-haspopup="true"
-                    onClick={this.handleClick}
-                    className="post-options"
-                  >
-                    <VertIcon />
-                  </IconButton>
-                  <Menu
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={this.handleClose}
-                  >
-                    <MenuItem component={Link} to={`/${post.category}/${post.id}/edit`}>Edit</MenuItem>
-                    <MenuItem onClick={(e) => this.onDeletePost(e)}>Delete</MenuItem>
-                  </Menu>
-                  <h2>{capitalize(post.title)}</h2>
-                  <p>{post.body}</p>
-                  <small>Posted on <b>{timestampToDate(post.timestamp)}</b> by <b>{post.author}</b> at {post.category} / <u>{post.commentCount} comments</u></small>
-                  <br/>
-                </Grid>
-              </Grid>
-              {comments && <PostComments category={post.category} comments={comments}/>}
-              <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
-                <CommentIcon /> Add a Comment
-              </Button>
-            </Paper>
-          )}
-          </Grid>
-          <Grid item xs={12} md={2}>
-          </Grid>
-        </Grid>
-      </div>
-    );
   }
 }
 

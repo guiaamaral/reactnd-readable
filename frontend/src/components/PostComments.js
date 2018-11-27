@@ -7,7 +7,7 @@ import UpIcon from '@material-ui/icons/ArrowDropUp';
 import DownIcon from '@material-ui/icons/ArrowDropDown';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import * as commentActions from '../actions/comments'
+import * as commentActions from '../actions/comments';
 import { timestampToDate } from '../utils/helpers';
 
 class PostComments extends Component {
@@ -18,7 +18,7 @@ class PostComments extends Component {
   onDeleteComment = (comment) => {
     this.props.deleteComment(comment.id, () => {
       this.props.fetchComments(comment.parentId);
-    })
+    });
   }
 
   render() {

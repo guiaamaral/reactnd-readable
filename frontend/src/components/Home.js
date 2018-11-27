@@ -20,26 +20,40 @@ class Home extends Component {
   static propTypes = {
     categories: PropTypes.array,
     posts: PropTypes.array
-  }
+  };
 
   state = {
     value: ''
-  }
+  };
 
   handleChange = event => {
     this.setState({ value: event.target.value });
     this.props.sortPost(event.target.value);
-  }
+  };
 
   componentDidMount() {
     this.props.fetchCategories();
     this.props.fetchPosts();
-  }
+    document.body.classList.toggle('home')
+  };
+  
+  componentWillUnmount() {
+    document.body.classList.remove('home')
+  };
 
   render() {
-    const { categories, posts, fetchPosts, votePost } = this.props
+    const { categories, fetchPosts, match, posts, votePost } = this.props;
+
+    const filterPosts = posts.filter(post => {
+      if(match.params.category) {
+        return post.category === match.params.category
+      } else {
+        return post
+      }
+    });  
+
     return (
-      <div>
+      <div className="homepage">
         <Grid container>
           <Grid item xs={12} md={3}>
             <ListCategories categories={categories} />
@@ -64,7 +78,7 @@ class Home extends Component {
                 </Select>
               </FormControl>
             </form>
-            {posts && posts.map(post => (
+            {filterPosts.map(post => (
               <Paper elevation={1} key={post.id} className="post">
                 <Grid container>
                   <Grid item xs={1} className="vote">

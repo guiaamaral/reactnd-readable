@@ -22,6 +22,11 @@ class AddPost extends Component {
 
   componentDidMount() {
     this.props.fetchCategories();
+    document.body.classList.toggle('new-post')
+  };
+  
+  componentWillUnmount() {
+    document.body.classList.remove('new-post')
   };
 
   handleChange = name => event => {

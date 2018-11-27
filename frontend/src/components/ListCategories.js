@@ -15,7 +15,7 @@ class ListCategories extends Component {
   render() {
     const { categories } = this.props
     return (
-      <div>
+      <div className="left-nav">
         <List component="nav">
           <ListItem>
             <ListItemText primary="Categories" />

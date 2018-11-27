@@ -11,17 +11,31 @@ body {
 .text-center {
   text-align: center;
 }
+.left-nav {
+  margin-right: 16px;
+}
+.back-icon {
+  color: #fff;
+}
+.home .back-icon {
+  display: none;
+  color: #fff;
+}
+.new-post .homepage {
+  display: none;
+}
 .menu {
   width: 1em;
   height: 1em;
 }
 .sort-by {
   direction: rtl;
-  margin-right: 10px;
+  margin-right: 16px;
   margin-top: 10px;
 }
 .post {
   margin-top: 16px;
+  margin-right: 16px;
 }
 .add-edit {
   margin-top: 16px;

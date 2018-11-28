@@ -105,7 +105,7 @@ export const voteComment = (commentId, option) => {
     },
     body: JSON.stringify({option})
   })
-    .then(res => res.json())
+  .then(res => res.json())
 }
 
 export const deleteComment = (commentId) => {
@@ -116,5 +116,5 @@ export const deleteComment = (commentId) => {
       'Content-Type': 'application/json'
     }
   })
-    .then(res => res.json())
+  .then(res => res.json())
 }

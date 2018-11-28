@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import UpIcon from '@material-ui/icons/ArrowDropUp';
 import DownIcon from '@material-ui/icons/ArrowDropDown';
 import CommentIcon from '@material-ui/icons/Chat';
@@ -120,9 +120,9 @@ class SinglePost extends Component {
                   </Grid>
                 </Grid>
                 {comments && <PostComments category={post.category} comments={comments}/>}
-                <Button color="primary" variant="extendedFab" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
+                <Fab color="primary" variant="extended" className="add-button" component={Link} to={`/${post.category}/${post.id}/comment`}>
                   <CommentIcon /> Add a Comment
-                </Button>
+                </Fab>
               </Paper>
             )}
             </Grid>

@@ -29,7 +29,7 @@ function categories(state = [], action) {
 }
 
 function posts(state = [], action) {
-  const { posts, post, postId, editPost, option, orderBy  } = action
+  const { posts, postId, editPost, option, orderBy  } = action
   switch(action.type) {
     case GET_POSTS :
       return posts
@@ -99,16 +99,6 @@ function comments(state = [], action) {
             if (option === "downVote") {
               comment.voteScore -= 1
             }
-          }
-          return comment
-        })
-      }
-    case VOTE_COMMENT:
-      return {
-        ...state,
-        [postId]: state[postId].map(comment => {
-          if(comment.id === commentId) {
-            comment = editComment
           }
           return comment
         })

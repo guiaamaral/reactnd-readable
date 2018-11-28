@@ -45,10 +45,9 @@ export const editComment = (commentId, postId, editedComment, callback) => {
   }
 }
 
-
 export const voteComment = (commentId, postId, option) => {
   return (dispatch) => {
-    API.voteComment(commentId, option).then(editComment => {
+    API.voteComment(commentId, option).then(voteComment => {
       dispatch({
         type: VOTE_COMMENT,
         commentId,

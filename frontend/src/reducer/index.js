@@ -29,14 +29,15 @@ function categories(state = [], action) {
 }
 
 function posts(state = [], action) {
-  const { posts, postId, editPost, option, orderBy  } = action
+  const { post, posts, postId, editPost, option, orderBy  } = action
   switch(action.type) {
     case GET_POSTS :
       return posts
     case ADD_POST:
-      return {
-        ...state.post
-      }
+      return [
+        ...state,
+        post
+      ]
     case EDIT_POST:
       return state.map(post => {
         if(post.id === postId) {
@@ -48,10 +49,16 @@ function posts(state = [], action) {
       return state.map(post => {
         if (post.id === postId) {
           if (option === "upVote") {
-            post.voteScore += 1
+            return {
+              ...post,
+              voteScore: post.voteScore + 1
+            }
           }
           if (option === "downVote") {
-            post.voteScore -= 1
+            return {
+              ...post,
+              voteScore: post.voteScore - 1
+            }
           }
         }
         return post
@@ -94,10 +101,16 @@ function comments(state = [], action) {
         [postId]: state[postId].map(comment => {
           if (comment.id === commentId) {
             if (option === "upVote") {
-              comment.voteScore += 1
+              return {
+                ...comment,
+                voteScore: comment.voteScore + 1
+              }
             }
             if (option === "downVote") {
-              comment.voteScore -= 1
+              return {
+                ...comment,
+                voteScore: comment.voteScore - 1
+              }
             }
           }
           return comment
